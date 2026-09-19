@@ -45,7 +45,7 @@ class TerminalUI {
     async waitForKey() {
         return new Promise(resolve => {
             process.stdin.once('data', data => {
-                resolve(data);
+                resolve(data.toString());
             });
         });
     }
