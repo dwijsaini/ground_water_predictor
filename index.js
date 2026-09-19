@@ -55,9 +55,9 @@ async function main() {
             break;
         }
 
-        if (key === '[A') { // UP arrow
+        if (key === '\x1b[A') { // UP arrow
             selectedIndex = (selectedIndex - 1 + menuOptions.length) % menuOptions.length;
-        } else if (key === '[B') { // DOWN arrow
+        } else if (key === '\x1b[B') { // DOWN arrow
             selectedIndex = (selectedIndex + 1) % menuOptions.length;
         } else if (key === '\r' || key === '\n') { // ENTER
             const choice = menuOptions[selectedIndex];
