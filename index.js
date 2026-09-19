@@ -17,7 +17,14 @@ async function main() {
         process.exit(1);
     }
 
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
+    } else {
+        console.log('Warning: Terminal raw mode not supported in this environment.');
+        console.log('Please run this application in a real terminal for full interactive support.');
+    }
     process.stdin.resume();
 
     const menuOptions = [
@@ -71,14 +78,18 @@ async function main() {
         }
     }
 
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     process.stdin.pause();
     ui.clear();
     console.log('Thank you for using the Ground Water Level Predictor. Goodbye!');
 }
 
 async function handlePredict(records) {
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     ui.clear();
     console.log('--- Predict Groundwater Level ---');
     const wellId = await ui.prompt('Enter Well ID (e.g., W01): ');
@@ -98,11 +109,15 @@ async function handlePredict(records) {
     }
 
     await ui.pause();
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
 }
 
 async function handleForecast(records) {
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     ui.clear();
     console.log('--- Forecast Future Level ---');
     const wellId = await ui.prompt('Enter Well ID (e.g., W01): ');
@@ -127,11 +142,15 @@ async function handleForecast(records) {
     }
 
     await ui.pause();
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
 }
 
 async function handleMissingData(records) {
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     ui.clear();
     console.log('--- Find and Estimate Missing Data ---');
 
@@ -160,11 +179,15 @@ async function handleMissingData(records) {
     }
 
     await ui.pause();
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
 }
 
 async function handleViewData(records) {
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     ui.clear();
     console.log('--- View Well Data ---');
 
@@ -187,11 +210,15 @@ async function handleViewData(records) {
     }
 
     await ui.pause();
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
 }
 
 async function handleAnalysis(records) {
-    process.stdin.setRawMode(false);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(false);
+    }
     ui.clear();
     console.log('--- Groundwater Analysis ---');
 
@@ -209,7 +236,9 @@ async function handleAnalysis(records) {
     }
 
     await ui.pause();
-    process.stdin.setRawMode(true);
+    if (process.stdin.setRawMode) {
+        process.stdin.setRawMode(true);
+    }
 }
 
 main().catch(err => {
