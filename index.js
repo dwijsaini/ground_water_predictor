@@ -60,21 +60,10 @@ async function main() {
         } else if (key === '\x1b[B' || key === 's' || key === 'S') { // DOWN arrow or 's'
             selectedIndex = (selectedIndex + 1) % menuOptions.length;
         } else if (key === '\r' || key === '\n' || key === 'k' || key === 'K') { // ENTER or 'k'
-            const choice = menuOptions[selectedIndex];
-
-            if (choice === 'Predict Groundwater Level') {
-                await handlePredict(records);
-            } else if (choice === 'Forecast Future Level') {
-                await handleForecast(records);
-            } else if (choice === 'Find Missing Data') {
-                await handleMissingData(records);
-            } else if (choice === 'View Well Data') {
-                await handleViewData(records);
-            } else if (choice === 'Analyze Groundwater') {
-                await handleAnalysis(records);
-            } else if (choice === 'Exit') {
-                running = false;
-            }
+            handleSelection(selectedIndex, records);
+        } else if (key >= '1' && key <= '6') { // Numeric selection 1-6
+            const numIndex = parseInt(key) - 1;
+            handleSelection(numIndex, records);
         }
     }
 
@@ -84,6 +73,32 @@ async function main() {
     process.stdin.pause();
     ui.clear();
     console.log('Thank you for using the Ground Water Level Predictor. Goodbye!');
+}
+
+async function handleSelection(index, records) {
+    const menuOptions = [
+        'Predict Groundwater Level',
+        'Forecast Future Level',
+        'Find Missing Data',
+        'View Well Data',
+        'Analyze Groundwater',
+        'Exit'
+    ];
+    const choice = menuOptions[index];
+
+    if (choice === 'Predict Groundwater Level') {
+        await handlePredict(records);
+    } else if (choice === 'Forecast Future Level') {
+        await handleForecast(records);
+    } else if (choice === 'Find Missing Data') {
+        await handleMissingData(records);
+    } else if (choice === 'View Well Data') {
+        await handleViewData(records);
+    } else if (choice === 'Analyze Groundwater') {
+        await handleAnalysis(records);
+    } else if (choice === 'Exit') {
+        process.exit(0);
+    }
 }
 
 async function handlePredict(records) {

@@ -20,7 +20,7 @@ class TerminalUI {
 
         options.forEach((option, index) => {
             const prefix = index === selectedIndex ? '> ' : '  ';
-            const text = `${prefix}${option}`;
+            const text = `${prefix}${index + 1}. ${option}`;
             const padding = ' '.repeat(width - 2 - text.length);
             console.log(`║${text}${padding}║`);
         });
