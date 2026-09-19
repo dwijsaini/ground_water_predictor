@@ -55,11 +55,11 @@ async function main() {
             break;
         }
 
-        if (key === '\x1b[A') { // UP arrow
+        if (key === '\x1b[A' || key === 'w' || key === 'W') { // UP arrow or 'w'
             selectedIndex = (selectedIndex - 1 + menuOptions.length) % menuOptions.length;
-        } else if (key === '\x1b[B') { // DOWN arrow
+        } else if (key === '\x1b[B' || key === 's' || key === 'S') { // DOWN arrow or 's'
             selectedIndex = (selectedIndex + 1) % menuOptions.length;
-        } else if (key === '\r' || key === '\n') { // ENTER
+        } else if (key === '\r' || key === '\n' || key === 'k' || key === 'K') { // ENTER or 'k'
             const choice = menuOptions[selectedIndex];
 
             if (choice === 'Predict Groundwater Level') {
